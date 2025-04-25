@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = "請填入你的 Channel access token"
+ACCESS_TOKEN = "f0F+oU0tjJOYCl8uZH6A6rGRpZbQ00Rb2rSqE7a8Jm67oCmvW2b9vcQGdvB677u44kP0Jd05+qQAhpu4PGgouae+1P6kww08Q504o3YkBuUiAaS74YB/UPJiUHGLGimqgySA8Q4Dl5KMqNJnjjcJyAdB04t89/1O/w1cDnyilFU="
 
 LOVE_QUOTES = [
     "你是我主程式裡的唯一參數。",
