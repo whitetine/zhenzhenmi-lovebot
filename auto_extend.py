@@ -1,5 +1,5 @@
 import datetime
-import random
+import random 
 import subprocess
 
 # 👉 1. 準備要新增的指令與內容
