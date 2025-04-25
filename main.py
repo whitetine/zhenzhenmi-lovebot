@@ -55,5 +55,8 @@ def reply(token, text):
     }
     requests.post("https://api.line.me/v2/bot/message/reply", headers=headers, json=body)
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Render 預設會給 PORT 環境變數
+    app.run(host='0.0.0.0', port=port)
