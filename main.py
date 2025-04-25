@@ -22,15 +22,7 @@ def home():
 @app.route("/webhook", methods=["POST"])
 def webhook():
     body = request.get_json()
-    print("📥 收到訊息：", json.dumps(body, indent=2, ensure_ascii=False))  # 加這行！
-    for event in body["events"]:
-        if event["type"] == "message":
-            reply_token = event["replyToken"]
-            reply(reply_token, random.choice(LOVE_QUOTES))
-    return jsonify({"status": "ok"})
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    body = request.get_json()
+    print("📥 收到訊息：", json.dumps(body, indent=2, ensure_ascii=False))  # log
     for event in body["events"]:
         if event["type"] == "message":
             msg = event["message"]["text"]
@@ -45,6 +37,7 @@ def webhook():
                 text = random.choice(LOVE_QUOTES)
             reply(reply_token, text)
     return jsonify({"status": "ok"})
+
 
 
 def reply(token, text):
