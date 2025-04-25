@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = "f0F+oU0tjJOYCl8uZH6A6rGRpZbQ00Rb2rSqE7a8Jm67oCmvW2b9vcQGdvB677u44kP0Jd05+qQAhpu4PGgouae+1P6kww08Q504o3YkBuUiAaS74YB/UPJiUHGLGimqgySA8Q4Dl5KMqNJnjjcJyAdB04t89/1O/w1cDnyilFU="
+ACCESS_TOKEN = "請填入你的 Channel access token"
 
 LOVE_QUOTES = [
     "你是我主程式裡的唯一參數。",
@@ -17,28 +17,29 @@ LOVE_QUOTES = [
 
 @app.route("/")
 def home():
-    return "Zhenzhen LoveBot 多人模式 💖"
+    return "Zhenzhen LoveBot 多人撩語模式啟動 💖"
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     body = request.get_json()
-    print("📥 收到訊息：", json.dumps(body, indent=2, ensure_ascii=False))  # log
-    for event in body["events"]:
-        if event["type"] == "message":
-            msg = event["message"]["text"]
+    print("📥 收到訊息：", json.dumps(body, indent=2, ensure_ascii=False))
+    for event in body.get("events", []):
+        if event.get("type") == "message":
+            msg = event["message"].get("text", "")
             reply_token = event["replyToken"]
+            print("📝 使用者說了：", msg)
             if "Python" in msg:
                 text = "我對你的感情就像 Python 的縮排，一旦對齊，就再也分不開。"
             elif "C++" in msg:
                 text = "你不是指標，卻讓我指向你整顆心。"
             elif "JavaScript" in msg:
                 text = "你不是 callback，但我總是在你之後才有反應。"
+            elif "SQL" in msg:
+                text = "你不是查詢語句，但你一出現我整個世界都 join 起來了。"
             else:
                 text = random.choice(LOVE_QUOTES)
             reply(reply_token, text)
     return jsonify({"status": "ok"})
-
-
 
 def reply(token, text):
     headers = {
